@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: 'develop-stage'
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/app/target
+    command: /bin/sh -c "cargo watch -x run"
+
+volumes:
+  cargo-cache:
+  target-cache:
